@@ -1,0 +1,31 @@
+[user]
+	email = {{ .email }}
+	name = Johny Woller Skovdal
+	signingkey = {{ .gitconfig.signingKey }}
+[core]
+	longpaths = true
+	autocrlf = true
+	excludesfile = {{ .gitconfig.homeDir }}\\.gitignore
+[push]
+	default = current
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[alias]
+	glog = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count=20
+	slog = log --pretty=format:'%C(yellow)%h %C(red)%ad %C(cyan)%an%C(green)%d %C(reset)%s' --date=human --decorate --max-count=20
+[advice]
+	detachedHead = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = {{ .gitconfig.sshSignPath }}
+[commit]
+	gpgsign = true
+
