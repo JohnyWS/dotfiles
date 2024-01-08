@@ -17,3 +17,5 @@ Lastly, apply the config changes:
 `chezmoi apply -v`
 
 Your new computer is now setup.
+
+Note: If you've created new SSH Key for this (recommended per PC), then make sure to add the public signature to GitHub.
