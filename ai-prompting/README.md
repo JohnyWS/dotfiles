@@ -16,8 +16,8 @@ The goal is to make learning explicit, reviewable, and transferable.
 
 Each AI system added to this folder is represented by two files:
 
-- <ai-system>.instructions.md
-- <ai-system>.intent.md
+- ai-system.instructions.md
+- ai-system.intent.md
 
 ---
 
