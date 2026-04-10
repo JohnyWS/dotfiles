@@ -1,15 +1,13 @@
-{
-  "data": {
-    "name": "Johny Woller Skovdal",
-    "email": '{{ promptOnce
-                "email"
-                "Primary email address (used for git, tooling, etc.)"
-                }}',
-    "gitconfig": {
-      "signingKey": '{{ promptOnce
-                "signingKey"
-                "public signing key to use"
-                }}',
-    }
-  }
-}
+data:
+  name: "Johny Woller Skovdal"
+
+  email: '{{ promptOnce
+    "email"
+    "Primary email address (used for git, tooling, etc.)"
+  }}'
+
+  gitconfig:
+    signingKey: '{{ promptOnce
+      "signingKey"
+      "Public signing key to use (SSH public key for git signing)"
+    }}'
