@@ -3,9 +3,14 @@
 	name = Johny Woller Skovdal
 	signingkey = {{ .gitconfig.signingKey }}
 [core]
-	longpaths = true
-	autocrlf = true
-	excludesfile = {{ .gitconfig.homeDir }}\\.gitignore
+{{- if eq .chezmoi.os "windows" }}
+    longpaths = true
+    autocrlf = true
+    excludesfile = {{ .chezmoi.homeDir }}\\.gitignore
+{{- else }}
+    autocrlf = input
+    excludesfile = {{ .chezmoi.homeDir }}/.gitignore
+{{- end }}
 [init]
 	defaultBranch = trunk
 [push]
