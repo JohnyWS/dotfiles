@@ -1,6 +1,6 @@
 [user]
 	email = {{ .email }}
-	name = Johny Woller Skovdal
+	name = {{ .name }}
 	signingkey = {{ .gitconfig.signingKey }}
 [core]
 {{- if eq .chezmoi.os "windows" }}
@@ -31,8 +31,6 @@
 	smudge = git-lfs smudge -- %f
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	program = {{ .gitconfig.sshSignPath }}
 [commit]
 	gpgsign = true
 
