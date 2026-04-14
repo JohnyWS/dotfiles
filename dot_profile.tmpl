@@ -26,7 +26,8 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Use Windows 1Password SSH agent if available
-if [ -z "$SSH_AUTH_SOCK" ] && [ -S /mnt/wslg/runtime-dir/ssh-agent.sock ]; then
+# Use the Windows 1Password SSH agent in WSL host shells only.
+# Dev Containers should keep their forwarded SSH_AUTH_SOCK value.
+if [ -z "$SSH_AUTH_SOCK" ] && [ -n "$WSL_DISTRO_NAME" ] && [ ! -f /.dockerenv ] && [ -S /mnt/wslg/runtime-dir/ssh-agent.sock ]; then
   export SSH_AUTH_SOCK=/mnt/wslg/runtime-dir/ssh-agent.sock
 fi
