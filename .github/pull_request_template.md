@@ -4,17 +4,30 @@
 
 ## Intent Links
 
-<!-- Example: #supported-environments, #risk-boundaries -->
-Intent: #
+<!-- Select at least one anchor. Use Other if needed. -->
+- [ ] #repo-purpose
+- [ ] #non-goals
+- [ ] #supported-environments
+- [ ] #risk-boundaries
+- [ ] #good-outcomes
+- [ ] #update-intent
+- [ ] Other: #
 
 ## Intent Impact
 
-<!-- Delete the options that do not apply. -->
-Intent impact: None / Minor / Major
+<!-- Select exactly one. -->
+- [ ] None
+- [ ] Minor
+- [ ] Major
 
 ## Risk Check
 
 - [ ] Could this break bootstrap/apply on a new machine?
+
+## Validation Evidence (Required for Major)
+
+<!-- Keep this short. Example: "Ran chezmoi status + apply -v in fresh WSL Ubuntu." -->
+
 
 ## Notes
 

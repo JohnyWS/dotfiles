@@ -2,6 +2,8 @@
 
 Use this file only for changes that materially affect scope, portability, or risk.
 
+Log entries are expected when intent impact is Major, or when purpose/support/risk boundaries move.
+
 Format:
 
 - YYYY-MM-DD: short note. Intent: #anchor

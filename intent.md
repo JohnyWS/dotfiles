@@ -25,6 +25,12 @@ Assumptions:
 - WSL host shells may use the Windows 1Password SSH agent
 - Dev Containers should keep their own forwarded SSH agent socket
 
+Not validated by default:
+
+- native Windows-only shell workflows (without WSL)
+- native macOS hosts
+- non-bash login shell behavior
+
 Windows-specific Git behavior belongs in the Windows fragment. POSIX and container-safe behavior belongs in the shared or POSIX fragments.
 
 ## risk-boundaries
@@ -40,6 +46,8 @@ This repo should not:
 
 Any change that could break `chezmoi init`, `chezmoi status`, or `chezmoi apply` on a new machine is high risk and should be called out explicitly.
 
+For high-risk changes, include brief validation evidence in the PR (for example, status/render/apply checks on a representative machine).
+
 ## good-outcomes
 
 Good changes usually look like one of these:
@@ -52,5 +60,7 @@ Good changes usually look like one of these:
 ## update-intent
 
 Update this file when the repository gains a new supported environment, changes bootstrap/apply assumptions, or moves a safety boundary.
+
+Heading stability rule: keep existing top-level headings stable. Prefer adding new headings over renaming existing ones, and note any unavoidable rename in `intent-log.md`.
 
 Do not update it for routine value tweaks or small config adjustments unless they change what this repo is trying to optimize for.
