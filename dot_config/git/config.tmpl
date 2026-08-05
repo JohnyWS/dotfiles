@@ -28,8 +28,8 @@
 	gpgsign = true
 {{- if .privateRepoRoot }}
 # Context-based identity switch: repos under privateRepoRoot use the private
-# identity. Trigger path is machine-specific (kept local, not committed).
-# Intent: #identity-switching
+# identity overlay (a chezmoi-managed file rendered from privateEmail).
+# Trigger path is machine-specific (kept local, not committed). Intent: #identity-switching
 [includeIf "gitdir/i:{{ .privateRepoRoot }}"]
-	path = {{ .privateRepoRoot }}.gitconfig
+	path = ~/.config/git/private.gitconfig
 {{- end }}

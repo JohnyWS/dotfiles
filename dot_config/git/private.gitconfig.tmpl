@@ -1,0 +1,8 @@
+{{- if .privateRepoRoot -}}
+# Private identity overlay - included by the shared git config's [includeIf]
+# for repos under privateRepoRoot. Rendered from privateEmail (render-time-local).
+# name and signingkey intentionally fall through to the default identity.
+# Intent: #identity-switching
+[user]
+	email = {{ .privateEmail }}
+{{- end }}
