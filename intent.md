@@ -16,22 +16,34 @@ Dev Containers remain the preferred place for project-specific tooling.
 
 ## supported-environments
 
-Expected to work for Windows with WSL2 and Ubuntu-like POSIX shells, with Git configured through chezmoi-managed dotfiles.
+Expected to work as a first-class experience on **both** native Windows and WSL2 / Ubuntu-like POSIX shells, with Git configured through chezmoi-managed dotfiles. Neither environment is a fallback for the other; a change is not done until it holds in both.
 
 Assumptions:
 
 - chezmoi is the apply mechanism
-- login shells read `.profile`
+- POSIX login shells read `.profile`
 - WSL host shells may use the Windows 1Password SSH agent
+- native Windows shells use the Windows-native 1Password mechanism directly
 - Dev Containers should keep their own forwarded SSH agent socket
 
 Not validated by default:
 
-- native Windows-only shell workflows (without WSL)
 - native macOS hosts
-- non-bash login shell behavior
+- non-bash POSIX login shell behavior
 
-Windows-specific Git behavior belongs in the Windows fragment. POSIX and container-safe behavior belongs in the shared or POSIX fragments.
+Windows-specific Git behavior belongs in the Windows fragment. POSIX and container-safe behavior belongs in the shared or POSIX fragments. Behavior common to both belongs in the shared fragment.
+
+## identity-switching
+
+A single machine may host repositories that require different Git identities — for example a default work identity and a separate private identity. The repo supports selecting identity by repository context (such as a directory prefix), so the correct identity applies automatically without per-repo hand-configuration.
+
+The value that selects context (which prefix maps to which identity) is machine-specific and must be collected at render time, never committed. A machine with no such split leaves it unset, and the default identity applies everywhere.
+
+This is a host-level concern on the native-Windows side, where repositories share a common root and are not naturally isolated. POSIX/WSL setups that isolate identity per repository need not use it.
+
+## commit-signing
+
+Commit signing must work in **both** supported environments. Both sign with the same public signing key, backed by 1Password, but reach it through each environment's native mechanism — the anchor does not fix which mechanism, only that signing succeeds in both without divergent keys. Signing is a portability- and risk-sensitive concern: a change that breaks signing on either side is high risk (see risk-boundaries).
 
 ## risk-boundaries
 
@@ -56,6 +68,8 @@ Good changes usually look like one of these:
 - shared Git defaults stay consistent while platform-specific behavior is isolated
 - WSL host shells gain host integration without breaking Dev Containers
 - prompts collect only local machine identity data that should not be committed
+- the correct Git identity applies automatically per repository context, with the selecting value kept local
+- commit signing keeps working in both native Windows and WSL after a change, verified on the affected side
 
 ## update-intent
 

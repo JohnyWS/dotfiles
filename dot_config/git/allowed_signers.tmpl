@@ -1,0 +1,7 @@
+# git allowed signers - maps identities to their SSH signing key so
+# `git log --show-signature` can verify locally on both Windows and WSL.
+# One key, both identities (default + private). Intent: #commit-signing
+{{ .email }} {{ .gitconfig.signingKey }}
+{{- if .privateRepoRoot }}
+{{ .privateEmail }} {{ .gitconfig.signingKey }}
+{{- end }}
