@@ -2,3 +2,9 @@
 	longpaths = true
 	autocrlf = true
 	excludesfile = ~/.gitignore
+{{- if .gitconfig.windowsSshSignProgram }}
+# Windows-native git signing via 1Password op-ssh-sign. WSL does not load this
+# fragment; it signs through the bridged agent socket instead. Intent: #commit-signing
+[gpg "ssh"]
+	program = {{ .gitconfig.windowsSshSignProgram }}
+{{- end }}

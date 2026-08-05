@@ -5,3 +5,18 @@ data:
 
   gitconfig:
     signingKey: '{{ promptStringOnce . "signingKey" "Public signing key to use (SSH public key for git signing)" }}'
+
+    # Windows-native commit signing program (1Password op-ssh-sign). Prompted per
+    # machine; used only by the Windows fragment. WSL signs via the agent socket
+    # (see dot_profile.tmpl) and ignores this. Intent: #commit-signing
+    windowsSshSignProgram: '{{ promptStringOnce . "windowsSshSignProgram" "Windows op-ssh-sign.exe path for git signing (e.g. the WindowsApps shim); leave empty on POSIX-only machines" }}'
+
+  # Context-based identity switching. privateRepoRoot is a directory prefix whose
+  # repos use the private identity. What matters: a TRAILING SLASH and FORWARD
+  # slashes (the git includeIf uses gitdir/i:, so case does not matter). Empty
+  # means no split and the default identity applies everywhere. Machine-specific,
+  # kept local at render time, never committed. Intent: #identity-switching
+  privateRepoRoot: '{{ promptStringOnce . "privateRepoRoot" "Repo dir prefix for the private identity - use forward slashes and a TRAILING slash (e.g. c:/git/private/); empty for none" }}'
+{{- if .privateRepoRoot }}
+  privateEmail: '{{ promptStringOnce . "privateEmail" "Email for the private identity used under privateRepoRoot" }}'
+{{- end }}

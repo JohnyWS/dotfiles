@@ -1,0 +1,4 @@
+# Stable line endings across Windows and WSL: store and check out LF everywhere,
+# so the same repo looks identical on both sides regardless of core.autocrlf.
+# Intent: #supported-environments
+* text=auto eol=lf
