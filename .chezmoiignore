@@ -1,0 +1,9 @@
+# Repo meta - governs/documents the repository, never deployed to $HOME.
+# Expresses the payload-vs-meta boundary (see intent.md #payload-vs-meta):
+# only payload (git config, shell profile) renders into the home directory.
+# Files/dirs beginning with "." (e.g. .github, .gitattributes) are already
+# ignored by chezmoi and need no entry here.
+README.md
+intent.md
+intent-log.md
+ai-prompting

@@ -14,6 +14,17 @@ This repository is not meant to provision full development environments, install
 
 Dev Containers remain the preferred place for project-specific tooling.
 
+## payload-vs-meta
+
+The repository holds two kinds of files, and they must not be confused:
+
+- **Payload** — files whose purpose is to become home-directory configuration on `chezmoi apply` (git config, shell profile, and their fragments). Payload is the reason the repo exists.
+- **Meta** — files that govern, document, or support the repository itself (the intent anchors, the intent log, the README, contribution templates, AI-prompting notes). Meta describes or governs the repo; it is never deployed.
+
+The invariant: **only payload renders into `$HOME`; meta never leaves the repository.** A home directory polluted with the repo's own README, anchors, or logs is a defect, not a feature — it means the boundary has leaked.
+
+This boundary must be explicit rather than inferred. chezmoi's default treats any non-payload file as a home-directory target, so without a deliberate boundary the meta files silently deploy. The repo must therefore declare which files are meta, so the payload/meta split is reconstructable by a reader and enforceable by the tool.
+
 ## supported-environments
 
 Expected to work as a first-class experience on **both** native Windows and WSL2 / Ubuntu-like POSIX shells, with Git configured through chezmoi-managed dotfiles. Neither environment is a fallback for the other; a change is not done until it holds in both.
