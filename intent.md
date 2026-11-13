@@ -41,9 +41,13 @@ The value that selects context (which prefix maps to which identity) is machine-
 
 This is a host-level concern on the native-Windows side, where repositories share a common root and are not naturally isolated. POSIX/WSL setups that isolate identity per repository need not use it.
 
+The switch applies to every version-control client this repo configures, not only `git`. jj (Jujutsu) reads none of git's config, so it carries its own copy of the switch from the same render-time value.
+
 ## commit-signing
 
 Commit signing must work in **both** supported environments. Both sign with the same public signing key, backed by 1Password, but reach it through each environment's native mechanism — the anchor does not fix which mechanism, only that signing succeeds in both without divergent keys. Signing is a portability- and risk-sensitive concern: a change that breaks signing on either side is high risk (see risk-boundaries).
+
+This holds for every version-control client this repo configures (`git` and jj), all using the same key. jj may sign at push time rather than at commit time, because it rewrites commits constantly and each signature is a 1Password approval; what must hold is that pushed commits are signed.
 
 ## risk-boundaries
 

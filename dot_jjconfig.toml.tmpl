@@ -1,0 +1,38 @@
+# jj (Jujutsu) user config. jj reads none of git's config, so identity,
+# signing and line endings are restated here. Intent: #identity-switching #commit-signing
+[user]
+name = "{{ .name }}"
+email = "{{ .email }}"
+
+[git]
+colocate = true
+# Sign at push, not on every rewrite: jj rewrites constantly and each signature
+# is a 1Password approval. jj 0.46 name; 0.47.1 migrates it to revsets.git-sign-on-push.
+sign-on-push = true
+
+[signing]
+behavior = "drop"
+backend = "ssh"
+key = "{{ .gitconfig.signingKey }}"
+backends.ssh.allowed-signers = "~/.config/git/allowed_signers"
+{{- if .gitconfig.windowsSshSignProgram }}
+backends.ssh.program = '{{ .gitconfig.windowsSshSignProgram }}'
+{{- end }}
+
+[working-copy]
+# Mirrors core.autocrlf per OS (jj ignores it and .gitattributes).
+eol-conversion = "{{ if eq .chezmoi.os "windows" }}input-output{{ else }}input{{ end }}"
+
+[revset-aliases]
+# PowerShell treats @ as an operator; HEAD avoids quoting.
+HEAD = "@"
+{{- if .privateRepoRoot }}
+{{- $root := .privateRepoRoot }}
+
+[[--scope]]
+# jj matches this prefix case-sensitively against the on-disk path, so the
+# drive letter is upper-cased (privateRepoRoot is typed as c:/git/private/).
+--when.repositories = ['{{ upper (substr 0 1 $root) }}{{ substr 1 (len $root) $root }}']
+[--scope.user]
+email = "{{ .privateEmail }}"
+{{- end }}

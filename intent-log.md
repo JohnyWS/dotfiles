@@ -15,3 +15,4 @@ Examples:
 - 2026-08-05: native Windows promoted from "not validated" to first-class alongside WSL; both must hold for a change to be done. Intent: #supported-environments
 - 2026-08-05: added context-based Git identity switching (default vs private by repo context; selecting value stays render-time-local). Intent: #identity-switching
 - 2026-08-05: stated commit signing must work in both environments via each OS's native 1Password mechanism, sharing one signing key. Intent: #supported-environments #commit-signing #risk-boundaries
+- 2026-11-13: added jj (Jujutsu) user config; identity switching and commit signing now cover jj, which ignores git config. jj signs at push time. Intent: #identity-switching #commit-signing #supported-environments
