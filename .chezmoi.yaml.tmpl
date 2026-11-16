@@ -16,7 +16,7 @@ data:
   # slashes (the git includeIf uses gitdir/i:, so case does not matter). Empty
   # means no split and the default identity applies everywhere. Machine-specific,
   # kept local at render time, never committed. Intent: #identity-switching
-  privateRepoRoot: '{{ promptStringOnce . "privateRepoRoot" "Repo dir prefix for the private identity - use forward slashes and a TRAILING slash (e.g. c:/git/private/); empty for none" }}'
+  privateRepoRoot: '{{ promptStringOnce . "privateRepoRoot" "Repo dir prefix for the private identity - use forward slashes and a TRAILING slash (e.g. c:/git/<private-folder>/); empty for none" }}'
 {{- if .privateRepoRoot }}
   privateEmail: '{{ promptStringOnce . "privateEmail" "Email for the private identity used under privateRepoRoot" }}'
 {{- end }}

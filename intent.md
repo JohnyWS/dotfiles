@@ -71,6 +71,19 @@ Any change that could break `chezmoi init`, `chezmoi status`, or `chezmoi apply`
 
 For high-risk changes, include brief validation evidence in the PR (for example, status/render/apply checks on a representative machine).
 
+## public-repository
+
+This repository is public. Everything pushed to it is public and permanent: file contents, commit messages, branch names, PR titles and descriptions, review comments and validation evidence. Rewriting history afterwards does not reliably take anything back.
+
+Nothing that identifies a specific machine, person or employer environment beyond what the repo already needs may appear there:
+
+- no secrets, private keys, tokens or 1Password item references
+- no email addresses, usernames, hostnames or machine IDs
+- no real local paths (home directories, repository roots, the private-identity prefix); use placeholders such as `<home>` or `<private-root>`
+- no employer-internal names, URLs, projects or tooling
+
+Machine-specific values arrive through chezmoi prompts at render time (see identity-switching). Validation evidence describes outcomes ("private repo resolves the private email"), not the values involved.
+
 ## good-outcomes
 
 Good changes usually look like one of these:

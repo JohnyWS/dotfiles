@@ -16,3 +16,4 @@ Examples:
 - 2026-08-05: added context-based Git identity switching (default vs private by repo context; selecting value stays render-time-local). Intent: #identity-switching
 - 2026-08-05: stated commit signing must work in both environments via each OS's native 1Password mechanism, sharing one signing key. Intent: #supported-environments #commit-signing #risk-boundaries
 - 2026-08-05: added payload-vs-meta boundary — only payload renders to $HOME; repo meta (anchors, log, README, templates, ai-prompting) never deploys. Fixes meta files leaking into the home directory. Intent: #payload-vs-meta #risk-boundaries
+- 2026-11-13: stated the repository is public and nothing machine-, person- or employer-specific may appear in files, commits or PR text; added AGENTS.md (meta) with that rule, the payload-vs-meta rule and stacked PRs for dependent changes. Intent: #public-repository #payload-vs-meta #risk-boundaries
