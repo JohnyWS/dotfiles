@@ -15,3 +15,4 @@ Examples:
 - 2026-08-05: native Windows promoted from "not validated" to first-class alongside WSL; both must hold for a change to be done. Intent: #supported-environments
 - 2026-08-05: added context-based Git identity switching (default vs private by repo context; selecting value stays render-time-local). Intent: #identity-switching
 - 2026-08-05: stated commit signing must work in both environments via each OS's native 1Password mechanism, sharing one signing key. Intent: #supported-environments #commit-signing #risk-boundaries
+- 2026-08-05: added payload-vs-meta boundary — only payload renders to $HOME; repo meta (anchors, log, README, templates, ai-prompting) never deploys. Fixes meta files leaking into the home directory. Intent: #payload-vs-meta #risk-boundaries
